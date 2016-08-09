@@ -199,10 +199,11 @@ The confusion matrix is clearly diagonal, and the performance measures below are
 unname(confMx[3])
 ```
 
-More importantly, the accuracy obtained in the *myTesting* subset (`r unname(confMx[3][[1]][1])`) is comparable with the one obtained with the *myTraining* dataset (`r max(rf_model$results$Accuracy)`), what suggests that an overfitting is not happening and, therefore, that the out-of-the-sample error is not big, being the in-sample error even smaller.
+More importantly, the accuracy obtained in the *myTesting* subset (`r unname(confMx[3][[1]][1])`) is comparable with the one obtained with the *myTraining* dataset (`r max(rf_model$results$Accuracy)`), what suggests that an overfitting is not happening and, therefore, that the out-of-the-sample error is small, being the in-sample error even smaller.
 
-With such good results, we proceed to generate the file with the predictions to submit for the assignment.
-```{r fileGeneration}
+With such good results, we proceed to generate the file with the predictions to the *testing* dataset to submit for the assignment.
+```{r testing}
+rf_pred2 <- predict(rf_model, testing)
 pml_write_files = function(x){
         n = length(x)
         for(i in 1:n){
@@ -211,7 +212,7 @@ pml_write_files = function(x){
         }
 }
 
-pml_write_files(rf_pred)
+pml_write_files(rf_pred2)
 ```
 
 ## Conclusions
